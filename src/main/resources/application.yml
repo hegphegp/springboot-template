@@ -18,12 +18,30 @@ spring:
   datasource:
     username: sde
     password: postgres
-    url: jdbc:postgresql://localhost:5432/icity
+    url: jdbc:postgresql://localhost:5432/online-code-generator
     driver-class-name: org.postgresql.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       max-lifetime: 1830000
       maximum-pool-size: 10
+
+mybatis-plus:
+  global-config:
+    #机器 ID 部分(影响雪花ID)
+    workerId: 1
+    #数据标识 ID 部分(影响雪花ID)(workerId 和 datacenterId 一起配置才能重新初始化 Sequence)
+    datacenterId: 18
+    db-config:
+      insert-strategy: ignored  # 忽略判断，
+      update-strategy: ignored  # 忽略判断，字段取值为null，即把null值保存到数据库，而不是忽略这个null的字段
+  refresh-mapper: true
+#  mapper-locations: classpath:mapper/*Mapper.xml
+#  type-aliases-package: com.ascs.xinfangguanli.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    call-setters-on-nulls: true
+    return-instance-for-empty-row: true
+    map-underscore-to-camel-case: true
 
 rate-limiter.one-second.limit: 2000
 url:
