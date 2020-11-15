@@ -1,0 +1,9 @@
+```
+docker run -itd --restart always --name redis --hostname redis -p 6379:6379 redis:5.0.5-alpine redis-server --port 6379 --protected-mode no --pidfile redis.pid --appendonly yes --bind 0.0.0.0 --requirepass admin --bind 0.0.0.0
+
+docker run -itd --restart always -e TZ=Asia/Shanghai -v /etc/localtime:/etc/localtime:ro -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name mysql mysql:5.7.23 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4;' --default-time-zone='+8:00' --innodb-flush-log-at-trx-commit=0 --log-timestamps=SYSTEM --sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'
+
+docker run -itd --restart always -e TZ=Asia/Shanghai -v /etc/localtime:/etc/localtime:ro -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 --name mysql mysql:8.0.11 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4;' --default-time-zone='+8:00' --log-timestamps=SYSTEM --sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' --default_authentication_plugin=mysql_native_password --performance_schema_max_table_instances=200 --table_definition_cache=100 --table_open_cache=100 --performance_schema=off --innodb_buffer_pool_size=8M --key_buffer_size=8M --tmp_table_size=8M --max_connections=50
+
+docker run -itd --name postgresql --restart always -e TZ=Asia/Shanghai -v /etc/localtime:/etc/localtime:ro -p 5432:5432 -e POSTGRES_USER=sde -e POSTGRES_PASSWORD=postgres postgres:11.8-alpine postgres -c max_connections=500
+```

@@ -1,0 +1,32 @@
+server:
+  port: 8088
+
+spring:
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: admin
+    timeout: 50ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: 500ms
+        min-idle: 0
+        shutdown-timeout: 100ms
+  datasource:
+    username: sde
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/icity
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      max-lifetime: 1830000
+      maximum-pool-size: 10
+
+rate-limiter.one-second.limit: 2000
+url:
+  authentication:
+    white-list: /oauth/login,/oauth/logout,/oauth/user-info,/oauth/captcha
+
